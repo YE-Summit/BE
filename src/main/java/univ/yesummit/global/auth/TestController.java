@@ -7,6 +7,6 @@ public class TestController {
 
     /**
      * 테스트용
-     * SSH key 값 수정
+     * SSH secret
      */
 }
