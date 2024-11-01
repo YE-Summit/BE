@@ -1,6 +1,7 @@
 package univ.yesummit.global.auth.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -15,6 +16,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import univ.yesummit.global.oauth.OAuth2MemberService;
 import univ.yesummit.global.oauth.OAuth2SuccessHandler;
+
+import java.util.List;
 
 
 @Configuration
@@ -34,7 +37,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
 
                 // cors 설정
-                .cors(cors -> cors.configurationSource(configurationSource()))
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 // 시큐리티 기본 로그인 비활성화
                 .formLogin(AbstractHttpConfigurer::disable)
@@ -71,18 +74,19 @@ public class SecurityConfig {
                 .build();
     }
 
+    @Value("${cors.allowed-origins.${spring.profiles.active}}")
+    private List<String> allowOriginList;
     @Bean
-    public CorsConfigurationSource configurationSource() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedHeader("*");
-        corsConfiguration.addAllowedMethod("*");
-        corsConfiguration.addAllowedOriginPattern("*");
-        corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.addExposedHeader("Authorization");
-
-        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
-        return urlBasedCorsConfigurationSource;
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(allowOriginList); // 허용할 Origin 추가
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+        configuration.addExposedHeader("Authorization");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 }
