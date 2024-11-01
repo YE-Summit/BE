@@ -19,7 +19,7 @@ on:
     branches: [dev]
 
 env:
-  CONTAINER_NAME: diary_dev
+  CONTAINER_NAME: yesummit
 
 jobs:
   Continuous-Integration:
