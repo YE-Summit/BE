@@ -15,7 +15,7 @@ public class SwaggerConfig {
                 .info(new Info()
                         .version("v1.0.0")              // 버전 기록
                         .title("YE;Summit API 명세서")     // API 명세서 제목
-                        .description("API 명세서"));      // 상세
+                        .description("API 명세서"));      // 상세명세서
 
     }
 }
