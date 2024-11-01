@@ -37,8 +37,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(configurationSource()))
 
                 // 시큐리티 기본 로그인 비활성화
-                .formLogin(AbstractHttpConfigurer::disable)
-                .httpBasic(AbstractHttpConfigurer::disable)
+//                .formLogin(AbstractHttpConfigurer::disable)
+//                .httpBasic(AbstractHttpConfigurer::disable)
 
                 // iframe 차단
                 .headers(header -> header.frameOptions(
