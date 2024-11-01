@@ -8,11 +8,11 @@ import lombok.RequiredArgsConstructor;
 public enum ErrorCode {
 
     /* 사용자 */
-    ALREADY_EXIST_MEMBER(00, "이미 존재하는 사용자입니다."),
-    NOT_FOUND_MEMBER(00, "사용자를 찾을 수 없습니다."),
-    MISMATCH_PASSWORD(00, "비밀번호가 일치하지 않습니다."),
-    OAUTH2_LOGIN_FAILED(00, "로그인에 실패했습니다."),
-    OAUTH2_REGISTRATION_FAILED(00, "회원가입에 실패했습니다."),
+    ALREADY_EXIST_MEMBER(5000, "이미 존재하는 사용자입니다."),
+    NOT_FOUND_MEMBER(5001, "사용자를 찾을 수 없습니다."),
+    MISMATCH_PASSWORD(5002, "비밀번호가 일치하지 않습니다."),
+    OAUTH2_LOGIN_FAILED(5003, "로그인에 실패했습니다."),
+    OAUTH2_REGISTRATION_FAILED(5004, "회원가입에 실패했습니다."),
 
 
     /* 공용 */
