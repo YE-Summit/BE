@@ -74,8 +74,9 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Value("${cors.allowed-origins.${spring.profiles.active}}")
+    @Value("${cors.allowed-origins:http://localhost:3000}")
     private List<String> allowOriginList;
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
